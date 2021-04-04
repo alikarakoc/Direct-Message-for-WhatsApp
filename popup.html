@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Whatsapp İle Direkt Mesaj</title>
+    <meta
+      name="description"
+      content="Rehberinizi doldurmadan direkt olarak mesaj gönderebilirsiniz!"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/intlTelInput.min.css" />
+    <style>
+      body {
+        font-size: 75%;
+        -moz-user-select: none;
+        user-select: none;
+      }
+      .form-control:focus {
+        border-color: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+          /* display: none; <- Crashes Chrome on hover */
+          -webkit-appearance: none;
+          margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+      }
+
+      input[type=number] {
+          -moz-appearance:textfield; /* Firefox */
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 400px; height: 300px">
+      <div class="container-fluid">
+        <div class="alert alert-success mt-3" role="alert">
+          Whatsapp İle Direkt Mesaj Gönderebilirsiniz!
+        </div>
+        <div class="form-group">
+          <label for="labelPhoneNumber" class="d-block">Telefon Numarası</label>
+          <input
+            type="tel"
+            class="form-control"
+            style="width: 140%"
+            id="ePhoneNumber"
+          />
+          <p id="valid-msg" class="d-none text-success">✓ Doğru telefon numarası</span>
+          <p id="error-msg" class="d-none text-danger"></span>
+        </div>
+        <div class="row mt-3">
+          <div class="jumbotron">
+            <button
+              id="btnSend"
+              class="btn btn-success mb-3 w-auto d-block mx-auto"
+              disabled
+            >
+              Whatsapp üzerinde aç
+            </button>
+            <p class="lead">
+              Kişiyi rehberinize kaydetmeden direkt olarak mesaj gönderin!
+            </p>
+            <hr />
+          </div>
+          <a
+            class="w-auto d-block mx-auto mb-3"
+            target="_blank"
+            href="https://www.linkedin.com/in/alikarakoc/"
+            >Author</a
+          >
+          |
+          <a
+            class="w-auto d-block mx-auto mb-3"
+            target="_blank"
+            href="https://github.com/bykrkc/"
+            >Github</a
+          >
+        </div>
+      </div>
+    </div>
+    <script src="/scripts/jquery/jquery-3.6.0.min.js"></script>
+    <script src="/scripts/bootstrap/bootstrap.min.js"></script>
+    <script src="/scripts/intlTelInput.min.js"></script>
+    <script src="/scripts/libphonenumber-max.js"></script>
+    <script src="/popup.js"></script>
+  </body>
+</html>
