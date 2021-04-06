@@ -87,13 +87,17 @@ function handler() {
         chrome.tabs.get(openedWhatsapp[0].id, function (tab) {
           chrome.tabs.highlight({ tabs: tab.index }, function () {});
           chrome.tabs.update(openedWhatsapp[0].id, {
-            url: `${sendUrl + lastNumber}`,
+            url: `${sendUrl + lastNumber}&text=${
+              document.getElementById("eMessage").value
+            }&app_absent=0`,
           });
         });
         window.close();
       } else {
         chrome.tabs.create({
-          url: `${sendUrl + lastNumber}`,
+          url: `${sendUrl + lastNumber}&text=${
+            document.getElementById("eMessage").value
+          }&app_absent=0`,
           active: false,
         });
         window.close();
