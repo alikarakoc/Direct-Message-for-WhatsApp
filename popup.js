@@ -63,7 +63,10 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("cbMessageStatus")
     .addEventListener("click", checkMessage);
+
+
 });
+ 
 function checkMessage() {
   var checkBox = document.getElementById("cbMessageStatus");
   if (checkBox.checked == true) {
@@ -89,12 +92,12 @@ function handler() {
       const openedWhatsapp = tabs.filter((filter) => filter.url === baseUrl);
       if (openedWhatsapp.length > 0) {
         chrome.tabs.get(openedWhatsapp[0].id, function (tab) {
-          chrome.tabs.highlight({ tabs: tab.index }, function () {});
           chrome.tabs.update(openedWhatsapp[0].id, {
             url: `${sendUrl + lastNumber}&text=${
               document.getElementById("eMessage").value
             }&app_absent=0`,
           });
+          chrome.tabs.highlight({ tabs: tab.index }, function () {});
         });
         window.close();
       } else {

@@ -1,4 +1,3 @@
-
 {
   "manifest_version": 2,
   "name": "Whatsapp İle Direkt Mesaj",
@@ -15,11 +14,15 @@
     "default_icon": "/images/hello.png",
     "default_popup": "popup.html"
   },
-  "permissions": ["https://web.whatsapp.com/*"],
+  "permissions": ["activeTab", "https://web.whatsapp.com/*"],
   "content_scripts": [
     {
       "matches": ["http://*/*"],
-      "css": ["/css/style.css", "/css/bootstrap.min.css","/css/intlTelInput.min.css"],
+      "css": [
+        "/css/style.css",
+        "/css/bootstrap.min.css",
+        "/css/intlTelInput.min.css"
+      ],
       "js": [
         "/scripts/jquery/jquery-3.6.0.min.js",
         "/scripts/bootstrap/bootstrap.min.js",
