@@ -1,13 +1,13 @@
 {
   "manifest_version": 2,
-  "name": "Whatsapp İle Direkt Mesaj",
-  "description": "Whatsapp üzerinden rehberinize numara kayıt etmeden direkt mesaj gönderimi sağlar.",
+  "name": "WhatsApp İle Direkt Mesaj",
+  "description": "WhatsApp üzerinden rehberinize numara kayıt etmeden direkt mesaj gönderimi sağlar.",
   "icons": {
     "16": "/icons/icon_16.png",
     "48": "/icons/icon_48.png",
     "128": "/icons/icon_128.png"
   },
-  "version": "0.2",
+  "version": "0.3",
   "content_security_policy": "script-src 'self' https://ipinfo.io; object-src 'self'",
   "author": "Ali Karakoç",
   "browser_action": {
