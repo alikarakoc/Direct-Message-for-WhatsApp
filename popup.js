@@ -5,6 +5,7 @@ let lastNumber = "";
 const loaderShown = document.querySelector("._132Kx") !== null;
 window.isInitialized = false;
 window.isLoaded = loaderShown;
+
 function checkIsLoaded() {
   const loaderShown = document.querySelector("._132Kx") !== null;
   if (loaderShown && !isInitialized) {
