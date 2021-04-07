@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   var reset = function () {
-    input.classList.remove("error");
     errorMsg.innerHTML = "";
     errorMsg.classList.add("d-none");
     validMsg.classList.add("d-none");
@@ -46,7 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
         lastNumber = num;
       } else {
         input.classList.add("error");
-        var errorCode = iti.getValidationError();
         errorMsg.innerHTML = "Geçersiz telefon numarası.";
         errorMsg.classList.remove("d-none");
         document.querySelector("#btnSend").setAttribute("disabled", "disabled");
