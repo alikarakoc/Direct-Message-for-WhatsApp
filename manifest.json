@@ -14,10 +14,10 @@
     "default_icon": "/images/hello.png",
     "default_popup": "popup.html"
   },
-  "permissions": ["activeTab", "https://web.whatsapp.com/*"],
+  "permissions": ["https://web.whatsapp.com/*"],
   "content_scripts": [
     {
-      "matches": ["http://*/*"],
+      "matches": ["http://*/*", "https://*/*"],
       "css": [
         "/css/style.css",
         "/css/bootstrap.min.css",

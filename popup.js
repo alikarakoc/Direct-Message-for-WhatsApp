@@ -63,10 +63,13 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("cbMessageStatus")
     .addEventListener("click", checkMessage);
-
-
 });
- 
+
+setTimeout(() => {
+  if (document.querySelector("button._1E0Oz") !== null)
+    document.querySelector("button._1E0Oz").click();
+}, 3000);
+
 function checkMessage() {
   var checkBox = document.getElementById("cbMessageStatus");
   if (checkBox.checked == true) {
