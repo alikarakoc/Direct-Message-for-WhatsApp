@@ -7,14 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
     errorMsg = document.querySelector("#error-msg"),
     validMsg = document.querySelector("#valid-msg");
 
-  var errorMap = [
-    "Girilen değer telefon numarası gibi durmuyor.",
-    "Geçersiz ülke kodu",
-    "Girilen değer telefon numarası gibi durmuyor.",
-    "Girilen değer telefon numarası gibi durmuyor.",
-    "Girilen değer telefon numarası gibi durmuyor.",
-  ];
-
   var iti = window.intlTelInput(input, {
     initialCountry: "auto",
     separateDialCode: true,
@@ -44,8 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     errorMsg.classList.add("d-none");
     validMsg.classList.add("d-none");
   };
-
-  input.addEventListener("blur", function () {
+  input.addEventListener("keyup", function (event) {
     reset();
     if (input.value.trim()) {
       if (iti.isValidNumber()) {
@@ -56,19 +47,34 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         input.classList.add("error");
         var errorCode = iti.getValidationError();
-        errorMsg.innerHTML =
-          errorMap[errorCode] === undefined ? errorMap[0] : errorMap[errorCode];
+        errorMsg.innerHTML = "Geçersiz telefon numarası.";
         errorMsg.classList.remove("d-none");
         document.querySelector("#btnSend").setAttribute("disabled", "disabled");
         lastNumber = "";
       }
+    } else {
+      document.querySelector("#btnSend").setAttribute("disabled", "disabled");
+    }
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      document.getElementById("btnSend").click();
     }
   });
-  input.addEventListener("change", reset);
-  input.addEventListener("keyup", reset);
 
   document.getElementById("btnSend").addEventListener("click", handler);
+  document
+    .getElementById("cbMessageStatus")
+    .addEventListener("click", checkMessage);
 });
+function checkMessage() {
+  var checkBox = document.getElementById("cbMessageStatus");
+  if (checkBox.checked == true) {
+    document.getElementById("divMessage").classList.remove("d-none");
+  } else {
+    document.getElementById("divMessage").classList.add("d-none");
+    document.getElementById("eMessage").value = "";
+  }
+}
 function handler() {
   var phoneNumberInput = document.querySelector("#ePhoneNumber");
   var iti = intlTelInput(phoneNumberInput);

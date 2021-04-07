@@ -25,13 +25,13 @@
       }
       input::-webkit-outer-spin-button,
       input::-webkit-inner-spin-button {
-          /* display: none; <- Crashes Chrome on hover */
-          -webkit-appearance: none;
-          margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+        /* display: none; <- Crashes Chrome on hover */
+        -webkit-appearance: none;
+        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
       }
 
-      input[type=number] {
-          -moz-appearance:textfield; /* Firefox */
+      input[type="number"] {
+        -moz-appearance: textfield; /* Firefox */
       }
     </style>
   </head>
@@ -49,18 +49,34 @@
             style="width: 140%"
             id="ePhoneNumber"
           />
-          <p id="valid-msg" class="d-none text-success">✓ Doğru telefon numarası</span>
-          <p id="error-msg" class="d-none text-danger"></span>
+          <p id="valid-msg" class="d-none text-success">
+            ✓ Doğru telefon numarası
+          </p>
+          <p id="error-msg" class="d-none text-danger"></p>
         </div>
-        <div class="form-group">
-          <label for="labelPhoneNumber" class="d-block">Mesajınızı yazınız</label>
+        <div class="form-group mt-3 mb-2">
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="cbMessageStatus"
+            />
+            <label class="form-check-label" for="cbMessageStatus"
+              >Mesaj yazmak istiyorum.</label
+            >
+          </div>
+        </div>
+        <div class="form-group d-none" id="divMessage">
+          <label for="labelPhoneNumber" class="d-block"
+            >Mesajınız</label
+          >
           <textarea class="form-control" id="eMessage"></textarea>
         </div>
         <div class="row mt-3">
           <div class="jumbotron">
             <button
               id="btnSend"
-              class="btn btn-success mb-3 w-auto d-block mx-auto"
+              class="btn btn-success mb-3 w-100 d-block mx-auto"
               disabled
             >
               Gönder
