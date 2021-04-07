@@ -2,6 +2,23 @@ let baseUrl = "https://web.whatsapp.com/";
 let sendUrl = "https://web.whatsapp.com/send?phone=";
 let lastNumber = "";
 
+const loaderShown = document.querySelector("._132Kx") !== null;
+window.isInitialized = false;
+window.isLoaded = loaderShown;
+function checkIsLoaded() {
+  const loaderShown = document.querySelector("._132Kx") !== null;
+  if (loaderShown && !isInitialized) {
+    isInitialized = true;
+  }
+  if (!loaderShown && isInitialized) {
+    clearInterval(window.isWpLoaded);
+    document.querySelector("button._1E0Oz").click();
+  }
+}
+window.isWpLoaded = setInterval(function () {
+  checkIsLoaded();
+}, 200);
+
 document.addEventListener("DOMContentLoaded", function () {
   var input = document.querySelector("#ePhoneNumber"),
     errorMsg = document.querySelector("#error-msg"),
@@ -64,11 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("cbMessageStatus")
     .addEventListener("click", checkMessage);
 });
-
-setTimeout(() => {
-  if (document.querySelector("button._1E0Oz") !== null)
-    document.querySelector("button._1E0Oz").click();
-}, 3000);
 
 function checkMessage() {
   var checkBox = document.getElementById("cbMessageStatus");
