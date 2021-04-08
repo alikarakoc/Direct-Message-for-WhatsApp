@@ -13,7 +13,7 @@ function checkIsLoaded() {
   }
   if (!loaderShown && isInitialized) {
     clearInterval(window.isWpLoaded);
-    document.querySelector("button._1E0Oz").click();
+    document.querySelector("button._1E0Oz")?.click();
     //by alimert
   }
 }
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
     utilsScript: "/scripts/utils.js?1613236686837",
     preventInvalidNumbers: true,
     geoIpLookup: function (success, failure) {
-      $.get("https://ipinfo.io", function () { }, "jsonp").always(function (
+      $.get("https://ipinfo.io", function () {}, "jsonp").always(function (
         resp
       ) {
         var countryCode = resp && resp.country ? resp.country : "tr";
@@ -110,16 +110,18 @@ function handler() {
       if (openedWhatsapp.length > 0) {
         chrome.tabs.get(openedWhatsapp[0].id, function (tab) {
           chrome.tabs.update(openedWhatsapp[0].id, {
-            url: `${sendUrl + lastNumber}&text=${document.getElementById("eMessage").value
-              }&app_absent=0`,
+            url: `${sendUrl + lastNumber}&text=${
+              document.getElementById("eMessage").value
+            }&app_absent=0`,
           });
-          chrome.tabs.highlight({ tabs: tab.index }, function () { });
+          chrome.tabs.highlight({ tabs: tab.index }, function () {});
         });
         window.close();
       } else {
         chrome.tabs.create({
-          url: `${sendUrl + lastNumber}&text=${document.getElementById("eMessage").value
-            }&app_absent=0`,
+          url: `${sendUrl + lastNumber}&text=${
+            document.getElementById("eMessage").value
+          }&app_absent=0`,
           active: false,
         });
         window.close();
