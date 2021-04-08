@@ -7,7 +7,7 @@
     "48": "/icons/icon_48.png",
     "128": "/icons/icon_128.png"
   },
-  "version": "1.2.0",
+  "version": "1.2.1",
   "content_security_policy": "script-src 'self' https://ipinfo.io; object-src 'self'",
   "author": "Ali Karakoç",
   "browser_action": {

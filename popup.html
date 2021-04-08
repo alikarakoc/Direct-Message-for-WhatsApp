@@ -11,91 +11,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/intlTelInput.min.css" />
-    <style>
-      body {
-        font-size: 75%;
-        -moz-user-select: none;
-        user-select: none;
-      }
-      .form-control:focus {
-        border-color: none;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-      }
-      input::-webkit-outer-spin-button,
-      input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-
-      input[type="number"] {
-        -moz-appearance: textfield;
-      }
-    </style>
   </head>
-  <body>
-    <div style="width: 400px; height: 300px">
-      <div class="container-fluid">
-        <div class="alert alert-success mt-3" role="alert">
-          Whatsapp İle Direkt Mesaj Gönderebilirsiniz!
-        </div>
-        <div class="form-group">
-          <label for="labelPhoneNumber" class="d-block">Telefon Numarası</label>
-          <input
-            type="tel"
-            class="form-control"
-            style="width: 140%"
-            id="ePhoneNumber"
-          />
-          <p id="valid-msg" class="d-none text-success">
-            ✓ Doğru telefon numarası
-          </p>
-          <p id="error-msg" class="d-none text-danger"></p>
-        </div>
-        <div class="form-group mt-3 mb-2">
-          <div class="form-check form-switch">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="cbMessageStatus"
-            />
-            <label class="form-check-label" for="cbMessageStatus"
-              >Mesaj yazmak istiyorum.</label
-            >
-          </div>
-        </div>
-        <div class="form-group d-none" id="divMessage">
-          <label for="labelPhoneNumber" class="d-block">Mesajınız</label>
-          <textarea class="form-control" id="eMessage"></textarea>
-        </div>
-        <div class="row mt-3">
-          <div class="jumbotron">
-            <button
-              id="btnSend"
-              class="btn btn-success mb-3 w-100 d-block mx-auto"
-              disabled
-            >
-              Gönder
-            </button>
-            <p class="lead">
-              Kişiyi rehberinize kaydetmeden direkt olarak mesaj gönderin!
-            </p>
-            <hr />
-          </div>
-          <a
-            class="w-auto d-block mx-auto mb-3"
-            target="_blank"
-            href="https://www.linkedin.com/in/alikarakoc/"
-            >Author</a
-          >
-          |
-          <a
-            class="w-auto d-block mx-auto mb-3"
-            target="_blank"
-            href="https://github.com/bykrkc/"
-            >Github</a
-          >
-        </div>
+  <body class="wp-helpers body">
+    <div style="width: 400px; height: 350px">
+      <div class="wp-helpers alert alert-success">
+        Whatsapp İle Direkt Mesaj Gönderebilirsiniz!
+      </div>
+      <label class="wp-helpers d-block">Telefon Numarası</label>
+      <input
+        type="tel"
+        class="wp-helpers form-control outline-none"
+        style="width: 140%"
+        id="ePhoneNumber"
+      />
+      <div id="valid-msg" class="wp-helpers d-none text-success">
+        ✓ Doğru telefon numarası
+      </div>
+      <div id="error-msg" class="wp-helpers d-none text-danger"></div>
+
+      <label
+        class="wp-helpers form-check-label d-block mt-2 mb-2"
+        for="cbMessageStatus"
+      >
+        <input
+          class="wp-helpers d-block form-check-input"
+          type="checkbox"
+          id="cbMessageStatus"
+        />
+        Mesaj yazmak istiyorum.
+      </label>
+      <div class="wp-helpers form-group d-none" id="divMessage">
+        <label for="labelPhoneNumber" class="wp-helpers d-block"
+          >Mesajınız</label
+        >
+        <textarea
+          class="wp-helpers form-control w-100 p-0 m-0"
+          id="eMessage"
+          style="height: 70px"
+        ></textarea>
+      </div>
+      <button
+        id="btnSend"
+        class="wp-helpers btn btn-success mt-2 mb-2 w-100 d-block mx-auto"
+        disabled
+      >
+        Gönder
+      </button>
+      <div style="position: fixed; bottom: 10px; width: 100%">
+        <p class="lead">
+          Kişiyi rehberinize kaydetmeden direkt olarak mesaj gönderin!
+        </p>
+        <hr class="wp-helpers w-auto" />
+        <a
+          class="wp-helpers w-auto mt-2 mb-2 mx-auto"
+          target="_blank"
+          href="https://www.linkedin.com/in/alikarakoc/"
+          >Author</a
+        >
+        |
+        <a
+          class="wp-helpers w-auto mt-2 mb-2 mx-auto"
+          target="_blank"
+          href="https://github.com/bykrkc/"
+          >Github</a
+        >
       </div>
     </div>
     <script src="/scripts/jquery/jquery-3.6.0.min.js"></script>
