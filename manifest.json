@@ -20,12 +20,10 @@
       "matches": ["http://*/*", "https://*/*"],
       "css": [
         "/css/style.css",
-        "/css/bootstrap.min.css",
         "/css/intlTelInput.min.css"
       ],
       "js": [
         "/scripts/jquery/jquery-3.6.0.min.js",
-        "/scripts/bootstrap/bootstrap.min.js",
         "/scripts/intlTelInput.min.js",
         "popup.js"
       ]
