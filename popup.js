@@ -22,66 +22,70 @@ window.isWpLoaded = setInterval(function () {
 }, 200);
 
 document.addEventListener("DOMContentLoaded", function () {
-  var input = document.querySelector("#ePhoneNumber"),
-    errorMsg = document.querySelector("#error-msg"),
-    validMsg = document.querySelector("#valid-msg");
+  try {
+    var input = document.querySelector("#ePhoneNumber"),
+      errorMsg = document.querySelector("#error-msg"),
+      validMsg = document.querySelector("#valid-msg");
 
-  var iti = window.intlTelInput(input, {
-    initialCountry: "auto",
-    separateDialCode: true,
-    allowExtensions: true,
-    autoFormat: false,
-    autoHideDialCode: true,
-    autoPlaceholder: "polite",
-    defaultCountry: "auto",
-    ipinfoToken: "yolo",
-    nationalMode: true,
-    numberType: "MOBILE",
-    utilsScript: "/scripts/utils.js?1613236686837",
-    preventInvalidNumbers: true,
-    geoIpLookup: function (success, failure) {
-      $.get("https://ipinfo.io", function () {}, "jsonp").always(function (
-        resp
-      ) {
-        var countryCode = resp && resp.country ? resp.country : "tr";
-        success(countryCode);
-      });
-    },
-  });
+    var iti = window.intlTelInput(input, {
+      initialCountry: "auto",
+      separateDialCode: true,
+      allowExtensions: true,
+      autoFormat: false,
+      autoHideDialCode: true,
+      autoPlaceholder: "polite",
+      defaultCountry: "auto",
+      ipinfoToken: "yolo",
+      nationalMode: true,
+      numberType: "MOBILE",
+      utilsScript: "/scripts/utils.js?1613236686837",
+      preventInvalidNumbers: true,
+      geoIpLookup: function (success, failure) {
+        $.get("https://ipinfo.io", function () {}, "jsonp").always(function (
+          resp
+        ) {
+          var countryCode = resp && resp.country ? resp.country : "tr";
+          success(countryCode);
+        });
+      },
+    });
 
-  var reset = function () {
-    errorMsg.innerHTML = "";
-    errorMsg.classList.add("d-none");
-    validMsg.classList.add("d-none");
-  };
-  input.addEventListener("keyup", function (event) {
-    reset();
-    if (input.value.trim()) {
-      if (iti.isValidNumber()) {
-        validMsg.classList.remove("d-none");
-        document.querySelector("#btnSend").removeAttribute("disabled");
-        var num = iti.getNumber();
-        lastNumber = num;
+    var reset = function () {
+      errorMsg.innerHTML = "";
+      errorMsg.classList.add("d-none");
+      validMsg.classList.add("d-none");
+    };
+    input.addEventListener("keyup", function (event) {
+      reset();
+      if (input.value.trim()) {
+        if (iti.isValidNumber()) {
+          validMsg.classList.remove("d-none");
+          document.querySelector("#btnSend").removeAttribute("disabled");
+          var num = iti.getNumber();
+          lastNumber = num;
+        } else {
+          input.classList.add("error");
+          errorMsg.innerHTML = "Geçersiz telefon numarası.";
+          errorMsg.classList.remove("d-none");
+          document
+            .querySelector("#btnSend")
+            .setAttribute("disabled", "disabled");
+          lastNumber = "";
+        }
       } else {
-        input.classList.add("error");
-        errorMsg.innerHTML = "Geçersiz telefon numarası.";
-        errorMsg.classList.remove("d-none");
         document.querySelector("#btnSend").setAttribute("disabled", "disabled");
-        lastNumber = "";
       }
-    } else {
-      document.querySelector("#btnSend").setAttribute("disabled", "disabled");
-    }
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      document.getElementById("btnSend").click();
-    }
-  });
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("btnSend").click();
+      }
+    });
 
-  document.getElementById("btnSend").addEventListener("click", handler);
-  document
-    .getElementById("cbMessageStatus")
-    .addEventListener("click", checkMessage);
+    document.getElementById("btnSend").addEventListener("click", handler);
+    document
+      .getElementById("cbMessageStatus")
+      .addEventListener("click", checkMessage);
+  } catch (error) {}
 });
 
 function checkMessage() {
@@ -93,39 +97,101 @@ function checkMessage() {
     document.getElementById("eMessage").value = "";
   }
 }
+
+const detectWhatsapp = (phone, text) => {
+  const uri = `whatsapp://send/?phone=${encodeURIComponent(
+    phone
+  )}&text=${encodeURIComponent(text)}`;
+
+  const onIE = () => {
+    return new Promise((resolve) => {
+      window.navigator.msLaunchUri(
+        uri,
+        () => resolve(true),
+        () => resolve(false)
+      );
+    });
+  };
+
+  const notOnIE = () => {
+    return new Promise((resolve) => {
+      const a =
+        document.getElementById("wapp-launcher") || document.createElement("a");
+      a.id = "wapp-launcher";
+      a.href = uri;
+      a.style.display = "none";
+      document.body.appendChild(a);
+
+      const start = Date.now();
+      const timeoutToken = setTimeout(() => {
+        if (Date.now() - start > 1250) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      }, 1000);
+
+      const handleBlur = () => {
+        clearTimeout(timeoutToken);
+        resolve(true);
+      };
+      window.addEventListener("blur", handleBlur);
+
+      a.click();
+    });
+  };
+
+  return window.navigator.msLaunchUri ? onIE() : notOnIE();
+};
+
 function handler() {
+  // detectWhatsapp(lastNumber, document.getElementById("eMessage").value).then(
+  //   (hasWhatsapp) => {
+  //     if (!hasWhatsapp) {
+
+  //     } else {
+  //     }
+  //   }
+  // );
   var phoneNumberInput = document.querySelector("#ePhoneNumber");
-  var iti = intlTelInput(phoneNumberInput);
-  if (phoneNumberInput.value.length === 0) {
-    iti.destroy();
-    document.getElementById("error").classList.remove("d-none");
-    document.getElementById("error").innerHTML =
-      "Telefon numarası boş geçilemez!";
-    phoneNumberInput.focus();
-    return;
-  }
+  try {
+    var iti = intlTelInput(phoneNumberInput);
+    if (phoneNumberInput.value.length === 0) {
+      iti.destroy();
+      document.getElementById("error").classList.remove("d-none");
+      document.getElementById("error").innerHTML =
+        "Telefon numarası boş geçilemez!";
+      phoneNumberInput.focus();
+      return;
+    }
+  } catch (error) {}
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     chrome.tabs.getAllInWindow(null, function (tabs) {
       const openedWhatsapp = tabs.filter((filter) => filter.url === baseUrl);
       if (openedWhatsapp.length > 0) {
         chrome.tabs.get(openedWhatsapp[0].id, function (tab) {
           chrome.tabs.update(openedWhatsapp[0].id, {
-            url: `${sendUrl + lastNumber}&text=${
+            url: `${
+              sendUrl + encodeURIComponent(lastNumber)
+            }}&text=${encodeURIComponent(
               document.getElementById("eMessage").value
-            }&app_absent=0`,
+            )}&app_absent=0`,
           });
           chrome.tabs.highlight({ tabs: tab.index }, function () {});
         });
         window.close();
       } else {
         chrome.tabs.create({
-          url: `${sendUrl + lastNumber}&text=${
+          url: `${
+            sendUrl + encodeURIComponent(lastNumber)
+          }&text=${encodeURIComponent(
             document.getElementById("eMessage").value
-          }&app_absent=0`,
+          )}&app_absent=0`,
           active: false,
         });
         window.close();
       }
     });
   });
+  return;
 }
